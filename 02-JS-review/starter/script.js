@@ -142,3 +142,98 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+const books = getBooks();
+books;
+
+const b = getBook(3);
+const t = b.author;
+
+const { title, author, genres } = b;
+
+const [primaryGenre, secondaryGenre, ...others] = b.genres;
+
+const newGenres = [...b.genres, "and another beautiful one"]
+
+primaryGenre;
+secondaryGenre;
+others;
+newGenres;
+
+const extendedBook = { ...b, translator: "Not fucking needed" };
+
+extendedBook;
+
+const summary = `${b.title} is a book, it's evident like 2 + 2 = ${2 + 2}`;
+summary;
+
+const big = b.pages > 100 ? 'very big' : 'rather small';
+big;
+
+function getYear(str) {
+  return str.split('-')[0]
+}
+
+const y = getYear(b.publicationDate);
+y;
+
+const getYearNew = (str) => str.split('-')[0];
+
+const year = getYearNew(b.publicationDate);
+year;
+
+const x = books.map(b => ({
+  author: b.author,
+  title: b.title,
+  reviewsCount: b.reviews?.goodreads?.reviewsCount + b.reviews?.librarything?.reviewsCount
+}));
+x;
+
+const inSpanish = books.filter(b => b.translations.spanish);
+inSpanish;
+
+const byGenre = books.filter(b => b.genres.includes('novel') && b.genres.includes('fantasy fiction'));
+byGenre;
+
+const totalPages = books.reduce((acc, curr, idx, all) => acc + curr.pages, 0);
+totalPages;
+
+const biggest = books.sort((a, b) => a.pages - b.pages);
+biggest;
+
+const biggest1 = [1, 2, 4, 7, 10, 15, 2, 1, 1].sort((a, b) => a * 3 - b);
+biggest1;
+
+const newBook = {
+    id: 6,
+    title: "Dick",
+    publicationDate: "1954-07-29",
+    author: "Zalupa",
+    genres: [
+      "fantasy",
+    ],
+    hasMovieAdaptation: true,
+    pages: 69,
+    translations: {
+      spanish: "El señor de los anillos",
+    },
+    reviews: {
+      goodreads: {
+        rating: 4.52,
+        ratingsCount: 630994,
+        reviewsCount: 13417,
+      },
+      librarything: {
+        rating: 4.53,
+        ratingsCount: 47166,
+        reviewsCount: 452,
+      },
+    },
+  };
+
+const newBooks = [...books, newBook];
+newBooks;
+books;
+
+const newerBooks = newBooks.filter(b => b.id % 2 == 0);
+newerBooks;
