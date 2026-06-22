@@ -11,7 +11,12 @@ function App() {
   const tips = (myEval + friendsEval) / 2;
 
   return <>
-    <Amounts bill={bill} setBill={setBill} myEval={myEval} setMyEval={setMyEval} friendsEval={friendsEval} setFriendsEval={setFriendsEval} />
+    <Amounts
+      bill={bill}
+      setBill={setBill}
+      me={{ value: myEval, onChange: setMyEval }}
+      friend={{ value: friendsEval, onChange: setFriendsEval }}
+    />
     <Total bill={bill} tips={tips} />
   </>
 }

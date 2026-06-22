@@ -10,7 +10,7 @@ interface TipsComboboxProps {
 
 export function TipsCombobox({ percentage, onTipsChange, children }: TipsComboboxProps) {
   const onInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = Number(e.target.value ?? 0);
+    const value = Number(e.target.value);
     onTipsChange(value);
   };
 
