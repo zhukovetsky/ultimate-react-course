@@ -4,7 +4,9 @@ interface TotalProps {
 }
 
 export function Total({bill, tips}: TotalProps) {
+    const tipsAmount = Math.ceil(bill * tips * 1.0 / 100);
+
     return <>
-        <h1>Your total amount is ${bill + tips} (${bill} bill, ${tips} tips)</h1>
+        <h1>Your total amount is ${bill + tipsAmount} (${bill} bill, ${tipsAmount} tips)</h1>
     </>;
 }

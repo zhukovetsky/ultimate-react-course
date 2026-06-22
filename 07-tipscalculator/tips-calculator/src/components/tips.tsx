@@ -1,20 +1,28 @@
+import type { ReactNode } from "react";
+
 type NumberChange = (num: number) => void;
 
 interface TipsComboboxProps {
-    onTipsChange: NumberChange;
+  percentage: number;
+  onTipsChange: NumberChange;
+  children: ReactNode | ReactNode[] | undefined;
 }
 
-export function TipsCombobox({onTipsChange}: TipsComboboxProps) {
-    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        onTipsChange(parseInt(value));
-    }
-    return <><input onChange={onInputChange} />
-    <datalist>
+export function TipsCombobox({ percentage, onTipsChange, children }: TipsComboboxProps) {
+  const onInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = Number(e.target.value ?? 0);
+    onTipsChange(value);
+  };
+
+  return (
+    <div>
+      {children}
+      <select value={percentage} onChange={onInputChange}>
         <option value="0">Bad (0%)</option>
         <option value="5">Ok (5%)</option>
         <option value="10">Good (10%)</option>
         <option value="20">Excellent! (20%)</option>
-    </datalist>
-    </>
+      </select>
+    </div>
+  );
 }
