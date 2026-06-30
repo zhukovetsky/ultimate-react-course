@@ -41,14 +41,26 @@ function App() {
   const [addFriendsVisible, setAddFriendVisisble] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
+  const onFriendAdd = function(f: Friend) {
+    setFriends(friends => [...friends, f]);
+    setAddFriendVisisble(false);
+  }
+
+  const onNotifySplit = function (n: number) {
+    if (!selectedFriend) { return; }
+
+    // selectedFriend.balance += Number;
+    setSelectedFriend(null);
+  }
+
   return (
     <div className='app'>
       <div className='sidebar'>
         <FriendsList friends={friends} onSelectFriend={onSelectFriend}/>
-        { addFriendsVisible && <FormAddFriend />}
-        <Button onClick={addFriend}>Add friend</Button>
+        { addFriendsVisible && <FormAddFriend notifyFriendAdded={onFriendAdd}/>}
+        { !addFriendsVisible && <Button onClick={addFriend}>Add friend</Button> }
       </div>
-      {selectedFriend && <FormSplitBill friend={selectedFriend} />}
+      {selectedFriend && <FormSplitBill friend={selectedFriend} notifySplit={onNotifySplit} />}
     </div>
   )
 }
