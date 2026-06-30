@@ -34,7 +34,13 @@ function App() {
   }
 
   const onSelectFriend = (e: any) => {
-    setSelectedFriend(e);
+    setSelectedFriend(selected => {
+      if (!selected || selected != e) {
+        return e;
+      }
+
+      return null;
+    });
   }
 
   const [friends, setFriends] = useState(initialFriends);
@@ -49,14 +55,23 @@ function App() {
   const onNotifySplit = function (n: number) {
     if (!selectedFriend) { return; }
 
-    // selectedFriend.balance += Number;
+    selectedFriend.balance += n;
+
+    setFriends(friends => friends.map(f => {
+      if (f.id === selectedFriend.id) {
+        return selectedFriend;
+      }
+
+      return f;
+    }));
+
     setSelectedFriend(null);
   }
 
   return (
     <div className='app'>
       <div className='sidebar'>
-        <FriendsList friends={friends} onSelectFriend={onSelectFriend}/>
+        <FriendsList friends={friends} selectedFriend={selectedFriend} onSelectFriend={onSelectFriend}/>
         { addFriendsVisible && <FormAddFriend notifyFriendAdded={onFriendAdd}/>}
         { !addFriendsVisible && <Button onClick={addFriend}>Add friend</Button> }
       </div>
