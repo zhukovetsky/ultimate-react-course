@@ -29,7 +29,7 @@ const initialFriends: Friend[] = [
 
 
 function App() {
-  const addFriend = (e: any) => {
+  const addFriend = () => {
     setAddFriendVisisble(v => !v);
   }
 
@@ -45,7 +45,7 @@ function App() {
 
   const [friends, setFriends] = useState(initialFriends);
   const [addFriendsVisible, setAddFriendVisisble] = useState(false);
-  const [selectedFriend, setSelectedFriend] = useState(null);
+  const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
 
   const onFriendAdd = function(f: Friend) {
     setFriends(friends => [...friends, f]);
@@ -55,11 +55,9 @@ function App() {
   const onNotifySplit = function (n: number) {
     if (!selectedFriend) { return; }
 
-    selectedFriend.balance += n;
-
     setFriends(friends => friends.map(f => {
       if (f.id === selectedFriend.id) {
-        return selectedFriend;
+        return { ...f, balance: f.balance + n };
       }
 
       return f;

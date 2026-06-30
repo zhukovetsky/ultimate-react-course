@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Friend } from "../models/friend";
 import { FriendComponent } from "./friend";
 

@@ -9,7 +9,7 @@ interface FriendComponentProps {
 }
 
 export function FriendComponent({ friend, onSelect, selected }: FriendComponentProps) {
-  const onSelectClick = (e: any) => onSelect(friend);
+  const onSelectClick = () => onSelect(friend);
   
   return (
     <>
